@@ -10,7 +10,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    String id;
+    Long id;
 
     String name;
 
@@ -21,11 +21,17 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public String getId() {
+    public UserEntity(String name, String password, Double points) {
+        this.name = name;
+        this.points = points;
+        this.password = password;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

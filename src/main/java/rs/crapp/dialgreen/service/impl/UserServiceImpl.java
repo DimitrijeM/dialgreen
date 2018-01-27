@@ -8,9 +8,7 @@ import rs.crapp.dialgreen.domain.UserEntity;
 import rs.crapp.dialgreen.dto.UserFromDto;
 import rs.crapp.dialgreen.dto.UserToDto;
 import rs.crapp.dialgreen.service.UserService;
-import rs.crapp.dialgreen.util.impl.CastDtoDaoService;
 
-import java.util.ArrayList;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,27 +16,29 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    CastDtoDaoService castDtoDaoService;
-
-//    ArrayList<String> rawMaterials
 
     @Override
     public UserToDto createUser(UserFromDto user) {
-        UserEntity userEntity = castDtoDaoService.castUserFromDto(user);
+        UserEntity userEntity = new UserEntity(user.getName(), user.getPassword(), 0.0);
+//        UserEntity userEntity = castDtoDaoService.castUserFromDto(user);
         userRepository.save(userEntity);
-        UserToDto userToDto = castDtoDaoService.castUserToDto(userEntity);
+        UserToDto userToDto = new UserToDto(userEntity.getId(), userEntity.getName(), userEntity.getPoints());
+//        UserToDto userToDto = castDtoDaoService.castUserToDto(userEntity);
         return userToDto;
     }
 
 
     @Override
-    public UserToDto isUserExist(UserFromDto user) {
-        return null;
+    public UserEntity isUserExist(UserFromDto user) throws Exception{
+        UserEntity userEntity = userRepository.findUserEntitiesByName(user.getName());
+        if(userEntity.getPassword().equals(user.getPassword()))
+            return userEntity;
+        else throw new Exception("Incorrect password");
+
     }
 
     @Override
-    public UserToDto addPoints(String userId, double weight, String materialType) throws Exception{
+    public UserToDto addPoints(Long userId, double weight, String materialType) throws Exception{
         int coeff = 0;
         if(materialType.equals("PAPER")) coeff = RawMaterialConsts.PAPER_COEF;
         if(materialType.equals("GLASS")) coeff = RawMaterialConsts.GLASS_COEF;
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         points = userEntity.getPoints() + points;
         userEntity.setPoints(points);
         userRepository.save(userEntity);
-        UserToDto userToDto = castDtoDaoService.castUserToDto(userEntity);
+        UserToDto userToDto = new UserToDto(userEntity.getId(), userEntity.getName(), userEntity.getPoints());
 
         return userToDto;
     }

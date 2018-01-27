@@ -2,7 +2,7 @@ package rs.crapp.dialgreen.dto;
 
 public class AddPointsDto {
 
-    String userId;
+    Long userId;
 
     double weight;
 
@@ -11,11 +11,11 @@ public class AddPointsDto {
     public AddPointsDto() {
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

@@ -2,7 +2,7 @@ package rs.crapp.dialgreen.dto;
 
 public class UserToDto {
 
-    String id;
+    Long id;
 
     String name;
 
@@ -11,11 +11,17 @@ public class UserToDto {
     public UserToDto() {
     }
 
-    public String getId() {
+    public UserToDto(Long id, String name, Double point) {
+        this.id = id;
+        this.name = name;
+        this.point = point;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
