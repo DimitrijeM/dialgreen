@@ -1,17 +1,22 @@
 package rs.crapp.dialgreen.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name="user")
 public class UserEntity {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     String id;
 
     String name;
 
-    String points;
+    Double points;
+
+    String password;
 
     public UserEntity() {
     }
@@ -32,11 +37,19 @@ public class UserEntity {
         this.name = name;
     }
 
-    public String getPoints() {
+    public Double getPoints() {
         return points;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(Double points) {
         this.points = points;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

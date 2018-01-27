@@ -6,7 +6,7 @@ public class UserToDto {
 
     String name;
 
-    String point;
+    Double point;
 
     public UserToDto() {
     }
@@ -27,11 +27,11 @@ public class UserToDto {
         this.name = name;
     }
 
-    public String getPoint() {
+    public Double getPoint() {
         return point;
     }
 
-    public void setPoint(String point) {
+    public void setPoint(Double point) {
         this.point = point;
     }
 }
