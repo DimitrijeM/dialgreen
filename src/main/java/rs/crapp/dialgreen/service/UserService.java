@@ -9,5 +9,5 @@ public interface UserService {
 
     public UserToDto isUserExist(UserFromDto user); //login
 
-    public UserToDto addPoints(UserFromDto user, double weight, String materialType);
+    public UserToDto addPoints(String userId, double weight, String materialType) throws Exception;
 }
