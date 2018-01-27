@@ -3,7 +3,7 @@ package rs.crapp.dialgreen.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(table="user")
+@Entity(name="user")
 public class UserEntity {
 
     @Id
